@@ -29,7 +29,7 @@ pub const InitializeGameState = struct {
         };
     }
 
-    pub fn enter(state: *State) InitializeGameState {
+    pub fn enter(state: *State) void {
         const this = zil.cast(InitializeGameState, state);
 
         this.my_data += 1;
