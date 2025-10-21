@@ -17,5 +17,5 @@ pub fn cast(implementation: type, instance: anytype) *implementation {
             return @fieldParentPtr(field.name, instance);
         }
     }
-    @compileError(std.fmt.comptimePrint("zint: No interface field with type {s} found in {s}!", .{ @typeName(interface), @typeName(implementation) }));
+    @compileError(std.fmt.comptimePrint("zil: no interface field with type {s} found in {s}!", .{ @typeName(interface), @typeName(implementation) }));
 }
