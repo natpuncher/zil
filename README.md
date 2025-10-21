@@ -2,6 +2,8 @@
 
 zig interface linker
 
+![logo](res/logo.png)
+
 ## api
 
 ```zig
