@@ -45,8 +45,8 @@ pub const InitializeGameState = struct {
         _ = state;
     }
 
-    pub fn update(state: *State) void {
-        _ = state;
+    pub fn update(state: *State, delta_time: f32) void {
+        _ = .{state, delta_time};
     }
 
     pub fn render(state: *State) void {
