@@ -10,11 +10,7 @@ zig interface linker
 // interface
 pub const State = struct {
     enter: *const fn (state: *State) void,
-    load: *const fn (state: *State) void,
     exit: *const fn (state: *State) void,
-    update: *const fn (state: *State, delta_time: f32) void,
-    render: *const fn (state: *State) void,
-    renderUI: *const fn (state: *State) void,
 };
 ```
 
@@ -39,24 +35,10 @@ pub const InitializeGameState = struct {
         this.my_data += 1;
     }
 
-    pub fn load(state: *State) void {
-        _ = state;
-    }
-
     pub fn exit(state: *State) void {
-        _ = state;
-    }
+        const this = zil.cast(InitializeGameState, state);
 
-    pub fn update(state: *State, delta_time: f32) void {
-        _ = .{state, delta_time};
-    }
-
-    pub fn render(state: *State) void {
-        _ = state;
-    }
-
-    pub fn renderUI(state: *State) void {
-        _ = state;
+        this.my_data -= 1;
     }
 };
 ```
@@ -83,8 +65,8 @@ var sm: StateMachine = .{};
 var initialize_game_state = InitializeGameState.init();
 sm.enter(&initialize_game_state.state);
 
-var other_game_state = OtherGameState.init();
-sm.enter(&other_game_state.state);
+var next_game_state = NextGameState.init();
+sm.enter(&next_game_state.state);
 ```
 
 ## install
