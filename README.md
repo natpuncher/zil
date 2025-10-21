@@ -25,7 +25,7 @@ pub const InitializeGameState = struct {
 
     state: State,
 
-    pub fn init(services: *Services) InitializeGameState {
+    pub fn init() InitializeGameState {
         return .{
             .state = zil.link(InitializeGameState, State),
         };
@@ -63,16 +63,26 @@ pub const InitializeGameState = struct {
 // usage
 pub const StateMachine = struct {
     current_state: *State = undefined,
+    has_state: bool = false,
 
     pub fn enter(sm: *StateMachine, state: *State) void {
-        sm.current_state.exit();
+        if (sm.has_state) sm.current_state.exit();
 
         sm.current_state = state;
         sm.current_state.enter();
+        sm.has_state = true;
     }
 
     // ...
 };
+
+var sm: StateMachine = .{};
+
+var initialize_game_state = InitializeGameState.init();
+sm.enter(&initialize_game_state.state);
+
+var other_game_state = OtherGameState.init();
+sm.enter(&other_game_state.state);
 ```
 
 ## install
