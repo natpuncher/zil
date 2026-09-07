@@ -14,7 +14,7 @@ pub fn cast(implementation: type, instance: anytype) *implementation {
     const interface = @TypeOf(instance.*);
     inline for (implementation_info.fields) |field| {
         if (field.type == interface) {
-            return @fieldParentPtr(field.name, instance);
+            return @alignCast(@fieldParentPtr(field.name, instance));
         }
     }
     @compileError(std.fmt.comptimePrint("zil: no interface field with type {s} found in {s}!", .{ @typeName(interface), @typeName(implementation) }));
