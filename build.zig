@@ -10,7 +10,7 @@ pub fn build(build_settings: *std.Build) void {
 
     const tests = build_settings.addTest(.{
         .root_module = build_settings.createModule(.{
-            .root_source_file = build_settings.path("zil.zig"),
+            .root_source_file = build_settings.path("src/zil.zig"),
             .target = target,
             .optimize = optimize,
         }),
